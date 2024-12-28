@@ -55,8 +55,10 @@ class PendaftaranResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('Today')
+                ->query(fn (Builder $query) => $query->whereDate('created_at', now())),
             ])
+            
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
@@ -64,7 +66,8 @@ class PendaftaranResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
