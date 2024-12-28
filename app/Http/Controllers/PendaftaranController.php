@@ -9,7 +9,7 @@ class PendaftaranController extends Controller
 {
     public function index()
     {
-        $pendaftarans = Pendaftaran::all();
+        $pendaftarans = Pendaftaran::orderBy('created_at', 'desc')->get();
         return view('pendaftaran.index', compact('pendaftarans'));
     }
 
